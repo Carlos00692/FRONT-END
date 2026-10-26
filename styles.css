@@ -1,0 +1,75 @@
+/*
+ * Club de Futsal · Hoja de estilos
+ * Organización: tokens -> base -> componentes -> responsivo.
+ * Layout: Flexbox (navegación, filtros) y Grid (resumen, formularios, columnas).
+ */
+/* ===== Tokens: verde césped profundo + dorado (claro / oscuro) ===== */
+:root{--bg:#f1f4f2;--sf:#fff;--tx:#10201a;--mu:#5d6f66;--bd:#dce4df;--hd:#0f3d2b;--btn:#0f3d2b;--onbtn:#fff;--gold:#c9a24a;--num:#0f3d2b;--ok:#17784c;--bad:#b3372c;--sh:0 1px 2px rgba(15,61,43,.06),0 8px 24px rgba(15,61,43,.06);
+--fs:"Avenir Next","Segoe UI",system-ui,sans-serif;--fh:Georgia,"Times New Roman",serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1511;--sf:#12211a;--tx:#e9f0ec;--mu:#93a99d;--bd:#243a30;--hd:#0a2a1d;--btn:#d6b25e;--onbtn:#14210f;--num:#d6b25e;--ok:#4fcf8c;--bad:#ff9186;--sh:none}}
+:root[data-theme="dark"]{--bg:#0b1511;--sf:#12211a;--tx:#e9f0ec;--mu:#93a99d;--bd:#243a30;--hd:#0a2a1d;--btn:#d6b25e;--onbtn:#14210f;--num:#d6b25e;--ok:#4fcf8c;--bad:#ff9186;--sh:none}
+html{scroll-padding-top:4.5rem;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--fs);line-height:1.55}
+/* ===== Cabecera: líneas de cancha como motivo ===== */
+header{position:relative;overflow:hidden;background:var(--hd);color:#fff;padding:3rem 1.25rem 2.5rem}
+header::before{content:"";position:absolute;right:-60px;top:50%;width:260px;height:260px;margin-top:-130px;border:2px solid rgba(255,255,255,.14);border-radius:50%}
+header::after{content:"";position:absolute;right:69px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.14)}
+header>*{position:relative;z-index:1;max-width:1120px;margin-inline:auto}
+header h1{margin-block:0;font-family:var(--fh);font-weight:400;font-size:clamp(1.8rem,6vw,2.9rem);line-height:1.1;letter-spacing:-.01em}
+header h1::after{content:"";display:block;width:56px;height:3px;background:var(--gold);margin-top:1rem}
+header p{margin-block:.9rem 0;color:rgba(255,255,255,.78);max-width:46ch}
+/* ===== Navegación (Flexbox) ===== */
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:.25rem 1.5rem;padding:0 1rem;background:var(--sf);border-bottom:1px solid var(--bd);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+nav a{padding:.9rem .25rem;color:var(--mu);text-decoration:none;font-weight:600;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+nav a:hover,nav a:focus-visible{color:var(--tx);border-bottom-color:var(--gold)}
+main{max-width:1120px;margin:0 auto;padding:2rem 1rem 1rem}
+section{margin-bottom:3rem}
+h2{display:flex;align-items:center;gap:1rem;margin:0 0 1.1rem;font-family:var(--fh);font-weight:400;font-size:1.6rem}
+h2::after{content:"";flex:1;height:1px;background:var(--bd)}
+/* ===== Resumen (Grid) ===== */
+.resumen{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+.dato{background:var(--sf);border:1px solid var(--bd);border-radius:.75rem;padding:1.1rem 1.2rem;box-shadow:var(--sh)}
+.dato b{display:block;font-family:var(--fh);font-weight:400;font-size:2.4rem;line-height:1.1;color:var(--num)}
+.dato span{color:var(--mu);font-size:.9rem}
+/* ===== Formularios (Grid) ===== */
+form{background:var(--sf);border:1px solid var(--bd);border-radius:.75rem;padding:1.25rem;margin-bottom:1rem;box-shadow:var(--sh)}
+fieldset{border:0;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.9rem}
+legend{font-family:var(--fh);font-size:1.15rem;margin-bottom:.9rem;padding:0}
+label{display:flex;flex-direction:column;gap:.3rem;font-size:.85rem;font-weight:600;color:var(--mu)}
+input,select{font:inherit;color:var(--tx);padding:.6rem .7rem;min-height:44px;border:1px solid var(--bd);border-radius:.5rem;background:var(--bg);transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,74,.28)}
+input:invalid:not(:placeholder-shown){border-color:var(--bad)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+button{font:inherit;font-weight:600;border:0;border-radius:.5rem;padding:.7rem 1.4rem;min-height:44px;margin-top:1rem;background:var(--btn);color:var(--onbtn);cursor:pointer;transition:filter .15s,transform .1s}
+button:hover{filter:brightness(1.12)}button:active{transform:translateY(1px)}
+button.sec{background:transparent;color:var(--bad);border:1px solid var(--bd);margin:0;padding:.3rem .7rem;min-height:36px;font-size:.85rem}
+button.sec:hover{border-color:var(--bad);filter:none}
+.msg{min-height:1.4rem;margin:.6rem 0 0;color:var(--ok);font-weight:600;font-size:.9rem}
+.filtro{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-bottom:.75rem}
+.filtro label{flex-direction:row;align-items:center}
+/* ===== Tablas ===== */
+.tabla{overflow-x:auto;background:var(--sf);border:1px solid var(--bd);border-radius:.75rem;box-shadow:var(--sh)}
+table{border-collapse:collapse;width:100%;min-width:560px}
+caption{text-align:left;padding:.9rem 1rem;font-family:var(--fh);font-size:1.15rem}
+th,td{padding:.7rem 1rem;text-align:left;border-top:1px solid var(--bd)}
+th{font-size:.8rem;font-weight:600;color:var(--mu);background:var(--bg)}
+tbody tr:hover td{background:var(--bg)}
+small{color:var(--mu)}
+.pill{display:inline-block;padding:.15rem .7rem;border-radius:999px;font-size:.8rem;font-weight:700}
+.pill.ok{color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.pill.mora{color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,transparent)}
+footer{text-align:center;color:var(--mu);padding:2rem 1rem;font-size:.85rem;border-top:1px solid var(--bd)}
+/* ===== Responsivo: escritorio ===== */
+@media (min-width:900px){.dos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:1.25rem;align-items:start}form{margin-bottom:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== Edición y acciones de tabla ===== */
+[hidden]{display:none!important}
+.botones,.acc{display:flex;flex-wrap:wrap;gap:.5rem}
+.botones button{margin-top:1rem}
+button.ed{background:transparent;color:var(--tx);border:1px solid var(--bd);margin:0;padding:.3rem .7rem;min-height:36px;font-size:.85rem}
+button.ed:hover{border-color:var(--gold);filter:none}
+button.ghost{background:transparent;color:var(--mu);border:1px solid var(--bd)}
+form[data-edit-id]{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,162,74,.3)}
+.apilado{display:grid;gap:1.25rem;min-width:0}
