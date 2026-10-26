@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Panel administrativo para una escuela de futsal: jugadores, pensiones y estadísticas.">
+<title>Club Futsal · Panel administrativo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>Escuela de Futsal<br>Panel del club</h1>
+  <p>Jugadores por categoría, pensiones y estadísticas de rendimiento.</p>
+</header>
+<nav aria-label="Secciones del sitio">
+  <a href="#resumen">Resumen</a><a href="#jugadores">Jugadores</a><a href="#pagos">Pensiones</a><a href="#estadisticas">Estadísticas</a>
+</nav>
+<main>
+  <section id="resumen" aria-labelledby="t-res">
+    <h2 id="t-res">Resumen del mes</h2>
+    <div class="resumen" id="cards"></div>
+  </section>
+
+  <section id="jugadores" aria-labelledby="t-jug">
+    <h2 id="t-jug">Registro de jugadores</h2>
+    <div class="dos">
+      <form id="f-jug" aria-label="Registrar jugador">
+        <fieldset><legend>Nuevo jugador</legend>
+          <label>Nombre completo<input name="nombre" required minlength="5" maxlength="60" placeholder=" " autocomplete="name"></label>
+          <label>Documento<input name="doc" required pattern="[0-9]{6,12}" inputmode="numeric" title="Entre 6 y 12 dígitos" placeholder=" "></label>
+          <label>Fecha de nacimiento<input name="nac" type="date" required min="2006-01-01" max="2021-12-31"></label>
+          <label>Categoría<select name="cat" required><option value="">Seleccione</option><option>Sub-8</option><option>Sub-10</option><option>Sub-12</option><option>Sub-14</option><option>Sub-16</option><option>Sub-18</option></select></label>
+          <label>Acudiente<input name="acu" required minlength="5" maxlength="60" placeholder=" "></label>
+          <label>Teléfono<input name="tel" type="tel" required pattern="3[0-9]{9}" title="Celular de 10 dígitos que empiece por 3" placeholder=" "></label>
+        </fieldset>
+        <div class="botones"><button type="submit">Registrar jugador</button><button type="button" class="ghost" data-cancel hidden>Cancelar edición</button></div>
+        <p class="msg" role="status" id="m-jug"></p>
+      </form>
+      <article>
+        <div class="filtro"><label for="fcat">Filtrar por categoría</label>
+          <select id="fcat"><option value="">Todas</option><option>Sub-8</option><option>Sub-10</option><option>Sub-12</option><option>Sub-14</option><option>Sub-16</option><option>Sub-18</option></select></div>
+        <div class="tabla"><table><caption>Jugadores inscritos</caption>
+          <thead><tr><th scope="col">Nombre</th><th scope="col">Categoría</th><th scope="col">Acudiente</th><th scope="col">Pensión</th><th scope="col">Acciones</th></tr></thead>
+          <tbody id="t-jug-b"></tbody></table></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="pagos" aria-labelledby="t-pag">
+    <h2 id="t-pag">Control de pensiones</h2>
+    <div class="dos">
+      <form id="f-pag" aria-label="Registrar pago">
+        <fieldset><legend>Registrar pago</legend>
+          <label>Jugador<select name="jug" required id="s-pag"></select></label>
+          <label>Mes pagado<input name="mes" type="month" required></label>
+          <label>Valor (COP)<input name="val" type="number" required min="10000" max="500000" step="1000" value="60000"></label>
+          <label>Fecha de pago<input name="fec" type="date" required></label>
+          <label>Medio<select name="med" required><option>Efectivo</option><option>Transferencia</option><option>Nequi</option></select></label>
+        </fieldset>
+        <div class="botones"><button type="submit">Guardar pago</button><button type="button" class="ghost" data-cancel hidden>Cancelar edición</button></div>
+        <p class="msg" role="status" id="m-pag"></p>
+      </form>
+      <article class="tabla"><table><caption>Historial de pagos</caption>
+        <thead><tr><th scope="col">Jugador</th><th scope="col">Mes</th><th scope="col">Valor</th><th scope="col">Fecha</th><th scope="col">Medio</th><th scope="col">Acciones</th></tr></thead>
+        <tbody id="t-pag-b"></tbody></table></article>
+    </div>
+  </section>
+
+  <section id="estadisticas" aria-labelledby="t-est">
+    <h2 id="t-est">Rendimiento deportivo</h2>
+    <div class="dos">
+      <form id="f-est" aria-label="Registrar estadísticas de partido">
+        <fieldset><legend>Estadísticas de un partido</legend>
+          <label>Jugador<select name="jug" required id="s-est"></select></label>
+          <label>Fecha del partido<input name="fec" type="date" required></label>
+          <label>Goles<input name="g" type="number" required min="0" max="30" value="0"></label>
+          <label>Asistencias<input name="a" type="number" required min="0" max="30" value="0"></label>
+          <label>Recuperaciones<input name="r" type="number" required min="0" max="60" value="0"></label>
+          <label>Remates al arco<input name="s" type="number" required min="0" max="60" value="0"></label>
+          <label>Minutos jugados<input name="m" type="number" required min="0" max="60" value="0"></label>
+        </fieldset>
+        <div class="botones"><button type="submit">Guardar estadística</button><button type="button" class="ghost" data-cancel hidden>Cancelar edición</button></div>
+        <p class="msg" role="status" id="m-est"></p>
+      </form>
+      <div class="apilado">
+        <article class="tabla"><table><caption>Acumulado por jugador</caption>
+          <thead><tr><th scope="col">Jugador</th><th scope="col">PJ</th><th scope="col">Goles</th><th scope="col">Asist.</th><th scope="col">Recup.</th><th scope="col">Remates</th><th scope="col">Min.</th><th scope="col">Acciones</th></tr></thead>
+          <tbody id="t-est-b"></tbody></table></article>
+        <div class="filtro" id="par-filtro" hidden><strong id="par-nombre"></strong><button type="button" class="ed" id="par-todos">Ver todos</button></div>
+        <article class="tabla"><table><caption>Partidos registrados</caption>
+          <thead><tr><th scope="col">Jugador</th><th scope="col">Fecha</th><th scope="col">Goles</th><th scope="col">Asist.</th><th scope="col">Recup.</th><th scope="col">Remates</th><th scope="col">Min.</th><th scope="col">Acciones</th></tr></thead>
+          <tbody id="t-par-b"></tbody></table></article>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><p>Programación Web · Unidad 1 · Proyecto: administración de escuela de futsal</p></footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>
