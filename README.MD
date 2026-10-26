@@ -5,12 +5,6 @@ Sitio web responsivo para que una escuela de futsal lleve el control administrat
 **Entregable 1 · Programación Web · Unidad 1 – Fundamentos de HTML y CSS**
 Fundación Universitaria Empresarial de la Cámara de Comercio de Bogotá – Uniempresarial
 
-- **Autor:** [Nombre del estudiante]
-- **Docente:** [Nombre del docente]
-- **Repositorio:** https://github.com/Carlos00692/FRONT-END
-
----
-
 ## Funcionalidades
 
 | Módulo | Qué permite |
